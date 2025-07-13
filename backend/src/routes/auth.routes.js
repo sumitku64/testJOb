@@ -28,6 +28,9 @@ router.post(
     body('password')
       .isLength({ min: 6 })
       .withMessage('Password must be at least 6 characters'),
+    body('phoneNumber')
+      .notEmpty()
+      .withMessage('Phone number is required'),
     body('role')
       .isIn(['client', 'advocate', 'intern'])
       .withMessage('Invalid role specified')

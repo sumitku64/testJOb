@@ -9,18 +9,24 @@ const Intern = require('../models/intern.model');
 exports.register = async (req, res, next) => {
   try {
     const { role } = req.body;
+    console.log('Registration attempt with data:', JSON.stringify(req.body));
 
     let user;
     if (role === 'advocate') {
+      console.log('Creating advocate user...');
       user = await Advocate.create(req.body);
     } else if (role === 'intern') {
+      console.log('Creating intern user...');
       user = await Intern.create(req.body);
     } else {
+      console.log('Creating regular user...');
       user = await User.create(req.body);
     }
 
+    console.log('User created successfully:', user._id);
     sendTokenResponse(user, 201, res);
   } catch (err) {
+    console.error('Registration error details:', err);
     next(err);
   }
 };

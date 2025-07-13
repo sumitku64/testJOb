@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backend Connection Test</title>
+</head>
+<body>
+    <h1>Backend Connection Test</h1>
+    <button onclick="testConnection()">Test Backend Connection</button>
+    <div id="result"></div>
+
+    <script>
+        async function testConnection() {
+            try {
+                const response = await fetch('http://localhost:5000/ping');
+                const data = await response.json();
+                document.getElementById('result').innerHTML = 
+                    `Connection successful! Response: ${JSON.stringify(data)}`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `Connection failed: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
